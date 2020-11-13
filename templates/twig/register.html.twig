@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription - {{ parent () }}{% endblock %}
+
+{% block body %}
+<section class="page-section">
+   <div class="container">
+   <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Inscription</h2>
+   <div class="divider-custom">
+      <div class="divider-custom-line"></div>
+      <div class="divider-custom-icon"><i class="fas fa-pen"></i></div>
+      <div class="divider-custom-line"></div>
+   </div>
+   <div class="row">
+   <div class="col-lg-8 mx-auto">
+      {% if session.error_register is not empty %}
+      <div class="alert alert-danger" role="danger">
+         {{ session.error_register }}    
+      </div>
+      {% endif %}
+      <form method="post" action="../public/index.php?route=register">
+         <div class="control-group">
+            <div class="form-group floating-label-form-group controls mb-0 pb-2">
+               <label for="title">Pseudo : </label><br>                                
+               <input type="text" id="pseudo" name="pseudo" placeholder="Pseudo"><br>
+               <p class="help-block text-danger"></p>
+            </div>
+            <div class="control-group">
+               <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                  <label for="password">Mot de passe</label><br>                                
+                  <input type="password" id="password" name="password" placeholder="Mot de passe"><br><br>
+                  <p class="help-block text-danger"></p>
+               </div>
+               <br>
+               <div class="alert alert-info" role="info">
+                  <i>Note : votre compte doit être validé par l'administrateur pour être fonctionnel</i>
+               </div>
+               <br>
+               <input type="submit" value="Inscription" id="submit" name="submit">
+               <br>
+      </form>
+      <br>
+      <a href="../public/index.php?route=blog" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Retour à l'accueil</a>
+      </div>
+      </div>
+   </div>
+</section>
+{% endblock %}

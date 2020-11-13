@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article - {{ parent () }}{% endblock %}
+
+{% block body %}
+<div class="page-section">
+   <div class ="container2">
+      <div class="row">
+         <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-newspaper"></i></div>
+            <div class="divider-custom-line"></div>
+         </div>
+         <div>
+            <h2>{{ article.getTitle() }}</h2>
+            <p>{{ article.getContent|nl2br }}</p>
+            <p><i>Créé par :</i> {{ article.getAuthor() }}</p>
+            <p><i>Dernière modification :</i> {{ article.getLastUpdateDate|date("d/m/Y") }}</p>
+         </div>
+         <br>
+         {% if session.role == 'admin' %}
+         <div class="actions">
+            <a href="../public/index.php?route=editArticle&articleId={{ article.getId() }}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Modifier</a> &nbsp;
+            <a href="../public/index.php?route=deleteArticle&articleId={{ article.getId() }}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Supprimer</a>
+         </div>
+         <br>
+         {% endif %}
+         <br>
+      </div>
+      <div class="col-lg-12 mx-auto">
+         <div id="comments" class="text-left" style="margin-left: 50px">
+            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Ajouter un commentaire</h2>
+            <div class="divider-custom">
+               <div class="divider-custom-line"></div>
+               <div class="divider-custom-icon"><i class="fas fa-comment"></i></div>
+               <div class="divider-custom-line"></div>
+            </div>
+            {{ include('form_comment.html.twig') }}
+            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Commentaires</h2>
+            <div class="divider-custom">
+               <div class="divider-custom-line"></div>
+               <div class="divider-custom-icon"><i class="fas fa-comments"></i></div>
+               <div class="divider-custom-line"></div>
+            </div>
+         </div>
+         <div class="row">
+            <div class="table">
+               <table>
+                  <tr>
+                     <td><b>Auteur</b></td>
+                     <td><b>Message</b></td>
+                     <td><b>Date</b></td>
+                     {% if session.role == 'admin' %}
+                     <td><b>Actions</b></td>
+                     {% endif %}
+                  </tr>
+                  {% for comment in comments %}
+                  <tr>
+                     <td>{{ comment.getPseudo() }}</td>
+                     <td>
+                        <p>{{ comment.getContent() }}</p>
+                     </td>
+                     <td><i>Posté le:</i> {{ comment.getCreatedAt()|date("d/m/Y") }}</td>
+                     {% if session.role == 'admin' %}
+                     <td><a href="../public/index.php?route=deleteComment&commentId={{ comment.getId() }}">Supprimer le commentaire</a></td>
+                     {% endif %}
+                     <br>
+                     {% endfor %}
+                  </tr>
+               </table>
+            </div>
+         </div>
+         <br>
+         <a href="../public/index.php?route=blog" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Retour à l'accueil</a>
+      </div>
+   </div>
+</div>
+{% endblock %}

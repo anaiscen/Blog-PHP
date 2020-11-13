@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion - {{ parent () }}{% endblock %}
+
+{% block body %}
+<section class="page-section">
+   <div class="container">
+   <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Connexion</h2>
+   <div class="divider-custom">
+      <div class="divider-custom-line"></div>
+      <div class="divider-custom-icon">
+         <i class="fas fa-user"></i>
+      </div>
+      <div class="divider-custom-line"></div>
+   </div>
+   <div class="row">
+   <div class="col-lg-8 mx-auto">
+      {{ session.error_login }}
+      <form method="post" action="../public/index.php?route=login">
+         <div class="control-group">
+            <div class="form-group floating-label-form-group controls mb-0 pb-2">
+               <label for="pseudo">Pseudo</label>
+               <br>
+               <input type="text" id="pseudo" name="pseudo" placeholder="Pseudo" value="{% if  post %}{{ post.get('pseudo') }}{% endif %}">
+               <br>
+               <p class="help-block text-danger"></p>
+               <br>
+            </div>
+            <div class="control-group">
+               <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                  <label for="password">Mot de passe</label>
+                  <br>
+                  <input type="password" id="password" placeholder="Mot de passe" name="password">
+                  <br>
+                  <p class="help-block text-danger"></p>
+                  <br>
+               </div>
+               <br>
+               <input type="submit" value="Connexion" id="submit" name="submit">
+      </form>
+      </div>
+      </div>
+      <br>
+      <br>
+      <a href="../public/index.php?route=blog" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Retour à l'accueil</a>
+   </div>
+</section>
+{% endblock %}

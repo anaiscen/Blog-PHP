@@ -1,0 +1,202 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration - {{ parent () }}{% endblock %}
+
+{% block body %}
+<br>
+<br>
+<br>
+<div class="container">
+	<h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Articles</h2>
+	<div class="divider-custom">
+		<div class="divider-custom-line"></div>
+		<div class="divider-custom-icon">
+			<i class="fas fa-newspaper"></i>
+		</div>
+		<div class="divider-custom-line"></div>
+	</div>
+	<a href="../public/index.php?route=addArticle" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Nouvel article</a>
+	<br>
+	<br>
+	<div class="row">
+		<div class= "table">
+			<table>
+				<tr>
+					<td>
+						<b>Id</b>
+					</td>
+					<td>
+						<b>Titre</b>
+					</td>
+					<td>
+						<b>Contenu</b>
+					</td>
+					<td>
+						<b>Auteur</b>
+					</td>
+					<td>
+						<b>Date</b>
+					</td>
+					<td>
+						<b>
+							Actions
+							</b
+							<
+						</td>
+					</tr>
+					{% for article in articles %}
+					<tr>
+						<td>
+							{{ article.getId() }}
+						</td>
+						<td>
+							<a href="../public/index.php?route=article&articleId=<?={{ article.getId() }}">{{ article.getTitle() }}</a>
+						</td>
+						<td>
+							{{ article.getContent()|length >
+							 250 ? article.getContent()|slice(0, 250) ~ '...' : article.getContent()  }}
+						</td>
+						<td>
+							{{ article.getAuthor() }}
+						</td>
+						<td>
+							Modifié le : {{ article.getCreatedAt|date("d/m/Y") }}
+						</td>
+						<td>
+							<a href="../public/index.php?route=editArticle&articleId={{ article.getId() }}">Modifier</a>
+							<a href="../public/index.php?route=deleteArticle&articleId={{ article.getId() }}">Supprimer</a>
+						</td>
+					</tr>
+					{% endfor %}
+				</table>
+			</div>
+		</div>
+		<br>
+		<br>
+		<h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Commentaires à valider</h2>
+		<div class="divider-custom">
+			<div class="divider-custom-line"></div>
+			<div class="divider-custom-icon">
+				<i class="fas fa-exclamation-triangle"></i>
+			</div>
+			<div class="divider-custom-line"></div>
+		</div>
+		<div class="row">
+			<div class="table">
+				<table>
+					<tr>
+						<td>
+							<b>Id</b>
+						</td>
+						<td>
+							<b>Auteur</b>
+						</td>
+						<td>
+							<b>Message</b>
+						</td>
+						<td>
+							<b>Date</b>
+						</td>
+						<td>
+							<b>Actions</b>
+						</td>
+					</tr>
+					{% for comment in comments %}
+					<tr>
+						<td>
+							{{ comment.getId() }}
+						</td>
+						<td>
+							{{ comment.getPseudo() }}
+						</td>
+						<td>
+							{{ comment.getContent()|length >
+							 250 ? comment.getContent()|slice(0, 250) ~ '...' : comment.getContent() }}
+						</td>
+						<td>
+							Créé le : {{ comment.getCreatedAt()|date("d/m/Y") }}
+						</td>
+						<td>
+							<a href="../public/index.php?route=validateComment&commentId={{ comment.getId() }}">Valider le commentaire</a>
+							<br>
+							<a href="../public/index.php?route=deleteComment&commentId={{ comment.getId() }}">Supprimer le commentaire</a>
+						</td>
+					</tr>
+					{% endfor %}
+				</table>
+			</div>
+		</div>
+		<br>
+		<br>
+		<h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Utilisateurs</h2>
+		<div class="divider-custom">
+			<div class="divider-custom-line"></div>
+			<div class="divider-custom-icon">
+				<i class="fas fa-user"></i>
+			</div>
+			<div class="divider-custom-line"></div>
+		</div>
+		<div class="row">
+			<div class="table">
+				<table>
+					<tr>
+						<td>
+							<b>Id</b>
+						</td>
+						<td>
+							<b>Pseudo</b>
+						</td>
+						<td>
+							<b>Date</b>
+						</td>
+						<td>
+							<b>Rôle</b>
+						</td>
+						<td>
+							<b>Statut</b>
+						</td>
+						<td>
+							<b>Actions</b>
+						</td>
+					</tr>
+					{% for user in users %}
+					<tr>
+						<td>
+							{{ user.getId() }}
+						</td>
+						<td>
+							{{ user.getPseudo() }}
+						</td>
+						<td>
+							Créé le : {{ user.CreatedAt()|date("d/m/Y") }}
+						</td>
+						<td>
+							{{ user.getRole() }}
+						</td>
+						{% if user.getValidated() == 1 %}
+						<td>
+							Validé
+						</td>
+						{% else %}
+						<td>
+							En attente
+						</td>
+						{% endif %}
+						<td>
+							{% if user.getRole()!= 'admin' %}
+							<a href="../public/index.php?route=deleteUser&userId={{ user.getId() }}">Supprimer</a>
+							{% else %}Suppression impossible{% endif %}
+							<br>
+							{% if user.getValidated() == 0 %}
+							<a href="../public/index.php?route=validateUser&userId={{ user.getId() }}">Valider</a>
+							{% endif %}
+						</td>
+					</tr>
+					{% endfor %}
+				</table>
+				<br>
+				<br>
+			</div>
+		</div>
+	</div>
+{% endblock %}

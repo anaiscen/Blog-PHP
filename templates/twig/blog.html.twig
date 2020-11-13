@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Blog - {{ parent () }}{% endblock %}
+
+{% block body %}
+   <div class="container2">
+	<br>
+	<br>
+	<br>
+	{% if session.pseudo %}
+	<div style="text-align: right">
+		Utilisateur connecté : {{ session.pseudo }}
+		<br>
+	</div>
+	<a href="../public/index.php?route=logout" class="btn btn-primary2 btn-sm active float-right" role="button" aria-pressed="true">Déconnexion</a>
+	<a href="../public/index.php?route=profile" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Profil</a>
+	{% if session.role == 'admin' %}
+	<a href="../public/index.php?route=administration" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Administration</a>
+	{% endif %}
+	<a href="../public/index.php?route=addArticle" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Nouvel article</a>
+	{% else %}
+	<a href="../public/index.php?route=register" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Inscription</a>
+	<a href="../public/index.php?route=login" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Connexion</a>
+	{% endif %}
+	<br>
+	<br>
+	<h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Mes Articles</h2>
+	<div class="divider-custom">
+		<div class="divider-custom-line"></div>
+		<div class="divider-custom-icon">
+			<i class="fas fa-newspaper"></i>
+		</div>
+		<div class="divider-custom-line"></div>
+	</div>
+	<div class="row">
+		{% for article in articles %}
+		<div class="col-lg-4 mx-auto">
+			<div class="card">
+				<div class="card-body">
+					<h3><a href="../public/index.php?route=article&articleId={{ article.getId() }}" >{{ article.getTitle() }}</a></h3>
+					<p>
+						{{ article.getContent()|length >
+						 250 ? article.getContent()|slice(0, 250) ~ '...' : article.getContent()  }}
+					</p>
+					<p>
+						<i>Créé par :</i>
+						 {{ article.getAuthor() }}
+					</p>
+					<p>
+						<i>Dernière modification :</i>
+						 {{ article.getLastUpdateDate|date("d/m/Y")}}
+					</p>
+				</div>
+			</div>
+			<br>
+		</div>
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}  

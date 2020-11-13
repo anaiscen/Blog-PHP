@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edition article - {{ parent () }}{% endblock %}
+
+{% block body %}
+<div>
+	{{ include('form_article.html.twig') }}
+	<a href="../public/index.php?route=blog">Retour à l'accueil</a>
+</div>
+{% endblock %}

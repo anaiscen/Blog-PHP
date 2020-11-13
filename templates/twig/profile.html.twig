@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Votre profil - {{ parent () }}{% endblock %}
+
+{% block body %}
+<section class="page-section">
+   <div class="container">
+      <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Profil</h2>
+      <div class="divider-custom">
+         <div class="divider-custom-line"></div>
+         <div class="divider-custom-icon"><i class="fas fa-user"></i></div>
+         <div class="divider-custom-line"></div>
+      </div>
+      <div class="row">
+         <div class="col-lg-8 mx-auto">
+            <div>
+               <h4>Utilisateur connecté : {{ session.pseudo }}</h4>
+               <a href="../public/index.php?route=updatePassword" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Modifier son mot de passe</a>&nbsp;
+               <a href="../public/index.php?route=deleteAccount" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Supprimer mon compte</a>
+            </div>
+            <br>    
+            <a href="../public/index.php?route=blog" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Retour à l'accueil</a>
+         </div>
+      </div>
+   </div>
+</section>
+{% endblock %}

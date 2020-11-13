@@ -1,0 +1,23 @@
+{% block body %}        
+<form method="post" action="../public/index.php?route=addComment&articleId={{ article.getId() }}">
+	<div class="form-group floating-label-form-group controls mb-0 pb-2">
+		<label for="pseudo">Pseudo</label>
+		<br>
+		<input type="text" id="pseudo" name="pseudo" placeholder="Pseudo" value="{{ session.pseudo }}">
+		<br>
+		<p class="help-block text-danger"></p>
+	</div>
+	<div class="form-group floating-label-form-group controls mb-0 pb-2">
+		<label for="content">Message</label>
+		<br>
+		<textarea id="content" rows="5" placeholder="Message" name="content"></textarea>
+		<br>
+		<p class="help-block text-danger"></p>
+		<br>
+	</div>
+	<i>Note : le commentaire sera visible après validation par l'administrateur</i>
+	<br>
+    <br>
+	<input type="submit" value="Ajouter" id="submit" name="submit" class="btn btn-primary btn-md active" role="button" aria-pressed="true">
+</form>        
+{% endblock %}

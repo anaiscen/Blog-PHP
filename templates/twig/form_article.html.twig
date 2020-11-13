@@ -1,0 +1,57 @@
+{% block body %}
+
+{% if post.get('id') is empty %}
+        {% set route = 'addArticle'%}
+        {% set label = 'Créer article'%}
+        {% set auteur = session.pseudo %}
+{% else %}
+        {% set route = 'editArticle&articleId=' ~ post.get('id') %}
+        {% set label = 'Modifier article'%}
+        {% set auteur = post.get('author') %}
+{% endif %}    
+<section class="page-section">
+	<div class="container">
+		<h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">{{ label }}</h2>
+		<div class="divider-custom">
+			<div class="divider-custom-line"></div>
+			<div class="divider-custom-icon">
+				<i class="fas fa-newspaper"></i>
+			</div>
+			<div class="divider-custom-line"></div>
+		</div>
+		<div class="row">
+			<div class="col-lg-8 mx-auto">
+				<form id="contactForm" novalidate="novalidate" method="post" action="../public/index.php?route={{route}}">
+					<div class="control-group">
+						<div class="form-group floating-label-form-group controls mb-0 pb-2">
+							<label for="title">Titre : </label>
+							<br>
+							<input class="form-control" id="title" name="title" value="{{ post.get('title') }}" type="text" placeholder="Titre" required="required" data-validation-required-message="Veuillez compléter ce champ" />
+							<p class="help-block text-danger"></p>
+						</div>
+						<div class="form-group floating-label-form-group controls mb-0 pb-2">
+							<label for="title">Contenu : </label>
+							<br>
+							<textarea class="form-control" id="content" name="content" rows="5" placeholder="Contenu" required="required" data-validation-required-message="Veuillez compléter ce champ">{{ post.get('content') }}</textarea>
+							<p class="help-block text-danger"></p>
+							<br>
+						</div>
+						<div class="form-group floating-label-form-group controls mb-0 pb-2">
+							<label for="title">Author : </label>
+							<br>
+							<input id="author" name="author" value="{{ auteur }}" type="text" placeholder="Titre" required="required" data-validation-required-message="Veuillez compléter ce champ" />
+							<p class="help-block text-danger"></p>
+						</div>
+						<br>
+						<br>
+						<input type="submit" value="{{label}}" id="submit" name="submit" class="btn btn-primary btn-md active" role="button" aria-pressed="true">
+						<br>
+						<br>
+						<a href="../public/index.php?route=blog" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Retour à l'accueil</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock %}
