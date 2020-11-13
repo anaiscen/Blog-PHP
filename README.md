@@ -2,7 +2,7 @@
 ## Parcours Développeur d'application - PHP / Symfony
 
 I used the theme Freelancer to construct this site.
-If you want to see the code on GitHub, click here : [https://github.com/anaiscen/blog](https://github.com/anaiscen/blog)
+If you want to see the code on GitHub, click here : [https://github.com/anaiscen/Projet5](https://github.com/anaiscen/Projet5)
 
 ## Installation
 To use this blog, you must follow this steps :
@@ -11,7 +11,7 @@ To use this blog, you must follow this steps :
 * Have fun !
 
 ## Preview
-![HomePage](https://github.com/anaiscen/blog/blob/master/public/img/HomePage.png)
+![HomePage](https://github.com/anaiscen/Projet5/blob/Main/public/img/HomePage.png)
 
 ## About Freelancer Theme
 
