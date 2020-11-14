@@ -1,9 +1,7 @@
 ---
 exclude_paths:
   - 'config/db.sql'
+  - 'public/**'
   - 'Twig/**'
+  - 'UML/**'
   - 'vendor/**'
-  - 'public/js/**'
-  - 'public/vendor/font-awesome/**'
-  - 'public/vendor/bootstrap/**'
-  - 'public/vendor/jquery/**'
