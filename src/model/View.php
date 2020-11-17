@@ -19,7 +19,7 @@ class View
 
     public function render($template, $data = [])
     {
-        echo $this->twig->render($template, $data);
+        print_r( $this->twig->render($template, $data) );
     }
 
     private function renderFile($file, $data)
