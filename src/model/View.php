@@ -19,6 +19,6 @@ class View
 
     public function render($template, $data = [])
     {
-        print_r( $this->twig->render($template, $data) );
+        print_r($this->twig->render($template, $data) );
     }
 }

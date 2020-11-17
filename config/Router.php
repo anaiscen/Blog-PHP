@@ -33,7 +33,6 @@ class Router
                 $this->runBackController($route);
                 $this->runFrontController($route);
                 $this->runAdminController($route);
-                $this->errorController->errorNotFound();
             }
             else{
                 $this->frontController->home();
@@ -111,5 +110,4 @@ class Router
             $this->backController->deleteAccount();
         }
     }
-
 }
