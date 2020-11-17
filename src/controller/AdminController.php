@@ -10,7 +10,7 @@ class AdminController extends Controller
     {
         if(!$this->session->get('pseudo')) {
             $this->session->set('need_login', 'Vous devez vous connecter pour accéder à cette page');
-            header('Location: ../public/index.php?route=login');
+            $this->redirect('Location: ../public/index.php?route=login');
         } else {
             return true;
         }
@@ -21,7 +21,7 @@ class AdminController extends Controller
         $this->checkLoggedIn();
         if(!($this->session->get('role') === 'admin')) {
             $this->session->set('not_admin', 'Vous n\'avez pas le droit d\'accéder à cette page');
-            header('Location: ../public/index.php?route=profile');
+            $this->redirect('Location: ../public/index.php?route=profile');
         } else {
             return true;
         }
@@ -51,7 +51,7 @@ class AdminController extends Controller
                 if (!$errors) {
                     $this->articleDAO->editArticle($post, $articleId, $this->session->get('id'));
                     $this->session->set('edit_article', 'L\' article a bien été modifié');
-                    header('Location: ../public/index.php?route=blog');
+                    $this->redirect('Location: ../public/index.php?route=blog');
                 }
                 return $this->view->render('edit_article.html.twig', [
                     'post' => $post,
@@ -75,7 +75,7 @@ class AdminController extends Controller
         if($this->checkAdmin()) {
             $this->articleDAO->deleteArticle($articleId);
             $this->session->set('delete_article', 'L\' article a bien été supprimé');
-            header('Location: ../public/index.php?route=blog');
+            $this->redirect('Location: ../public/index.php?route=blog');
         }
     }
 
@@ -84,7 +84,7 @@ class AdminController extends Controller
         if($this->checkAdmin()) {
             $this->commentDAO->validateComment($commentId);
             $this->session->set('unflag_comment', 'Le commentaire a bien été validé');
-            header('Location: ../public/index.php?route=administration');
+            $this->redirect('Location: ../public/index.php?route=administration');
         }
     }
 
@@ -93,7 +93,7 @@ class AdminController extends Controller
         if($this->checkAdmin()) {
             $this->commentDAO->deleteComment($commentId);
             $this->session->set('delete_comment', 'Le commentaire a bien été supprimé');
-            header('Location: ../public/index.php?route=administration');
+            $this->redirect('Location: ../public/index.php?route=administration');
         }
     }
 
@@ -102,7 +102,7 @@ class AdminController extends Controller
         if($this->checkAdmin()) {
             $this->userDAO->deleteUser($userId);
             $this->session->set('delete_user', 'L\'utilisateur a bien été supprimé');
-            header('Location: ../public/index.php?route=administration');
+            $this->redirect('Location: ../public/index.php?route=administration');
         }
     }
 
@@ -110,7 +110,7 @@ class AdminController extends Controller
     {
         if($this->checkAdmin()) {
             $this->userDAO->validateUser($userId);
-            header('Location: ../public/index.php?route=administration');
+            $this->redirect('Location: ../public/index.php?route=administration');
         }
     }
 }
