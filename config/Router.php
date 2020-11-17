@@ -4,6 +4,7 @@ namespace App\config;
 use App\src\controller\BackController;
 use App\src\controller\ErrorController;
 use App\src\controller\FrontController;
+use App\src\controller\AdminController;
 use Exception;
 
 class Router
@@ -11,6 +12,7 @@ class Router
     private $frontController;
     private $backController;
     private $errorController;
+    private $adminController;
     private $request;
 
     public function __construct($twig)
@@ -19,7 +21,7 @@ class Router
         $this->frontController = new FrontController($twig);
         $this->backController = new BackController($twig);
         $this->errorController = new ErrorController($twig);
-        
+        $this->adminController = new AdminController($twig);
     }
 
     public function run()
@@ -30,6 +32,7 @@ class Router
             {
                 $this->runBackController($route);
                 $this->runFrontController($route);
+                $this->runAdminController($route);
                 $this->errorController->errorNotFound();
             }
             else{
@@ -64,22 +67,36 @@ class Router
         }
     }
 
+    private function runAdminController($route)
+    {
+        if($route === 'editArticle'){
+            $this->adminController->editArticle($this->request->getPost(), $this->request->getGet()->get('articleId'));
+        }
+        elseif($route === 'deleteArticle'){
+            $this->adminController->deleteArticle($this->request->getGet()->get('articleId'));
+        }
+        elseif($route === 'validateComment'){
+            $this->adminController->validateComment($this->request->getGet()->get('commentId'));
+        }
+        elseif($route === 'deleteComment'){
+            $this->adminController->deleteComment($this->request->getGet()->get('commentId'));
+        }
+        elseif($route === 'deleteUser'){
+            $this->adminController->deleteUser($this->request->getGet()->get('userId'));
+        }
+        elseif($route === 'validateUser'){
+            $this->adminController->validateUser($this->request->getGet()->get('userId'));
+        }
+        elseif($route === 'administration'){
+            $this->adminController->administration();
+        }
+    }
+
+
     private function runBackController($route)
     {
         if($route === 'addArticle'){
             $this->backController->addArticle($this->request->getPost());
-        }
-        elseif($route === 'editArticle'){
-            $this->backController->editArticle($this->request->getPost(), $this->request->getGet()->get('articleId'));
-        }
-        elseif($route === 'deleteArticle'){
-            $this->backController->deleteArticle($this->request->getGet()->get('articleId'));
-        }
-        elseif($route === 'validateComment'){
-            $this->backController->validateComment($this->request->getGet()->get('commentId'));
-        }
-        elseif($route === 'deleteComment'){
-            $this->backController->deleteComment($this->request->getGet()->get('commentId'));
         }
         elseif($route === 'profile'){
             $this->backController->profile();
@@ -92,15 +109,6 @@ class Router
         }
         elseif($route === 'deleteAccount'){
             $this->backController->deleteAccount();
-        }
-        elseif($route === 'deleteUser'){
-            $this->backController->deleteUser($this->request->getGet()->get('userId'));
-        }
-        elseif($route === 'validateUser'){
-            $this->backController->validateUser($this->request->getGet()->get('userId'));
-        }
-        elseif($route === 'administration'){
-            $this->backController->administration();
         }
     }
 
