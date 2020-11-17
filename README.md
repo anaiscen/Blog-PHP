@@ -1,6 +1,8 @@
 # Projet 5 OpenClassrooms - Créez votre premier blog en PHP 
 ## Parcours Développeur d'application - PHP / Symfony
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/5fc28c0deb25405383b67b90f0fb664b)](https://www.codacy.com/gh/anaiscen/Projet5/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=anaiscen/Projet5&amp;utm_campaign=Badge_Grade)
+
 I used the theme Freelancer to construct this site.
 If you want to see the code on GitHub, click here : [https://github.com/anaiscen/Projet5](https://github.com/anaiscen/Projet5)
 
