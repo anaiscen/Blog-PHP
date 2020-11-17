@@ -21,15 +21,4 @@ class View
     {
         print_r( $this->twig->render($template, $data) );
     }
-
-    private function renderFile($file, $data)
-    {
-        if(file_exists($file)){
-            extract($data);
-            ob_start();
-            require $file;
-            return ob_get_clean();
-        }
-        header('Location: index.php?route=notFound');
-    }
 }

@@ -5,3 +5,4 @@ exclude_paths:
   - 'Twig/**'
   - 'UML/**'
   - 'vendor/**'
+  - 'README.md'
