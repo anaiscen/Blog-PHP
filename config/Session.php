@@ -4,22 +4,22 @@ namespace App\config;
 
 class Session
 {
-    private $session;
+    public $session;
 
-    public function __construct($session)
+    public function __construct()
     {
-        $this->session = $session;
+        $this->session = &$_SESSION;
     }
 
     public function set($name, $value)
     {
-        $_SESSION[$name] = $value;
+        $this->session[$name] = $value;
     }
 
     public function get($name)
     {
-        if(isset($_SESSION[$name])) {
-            return $_SESSION[$name];
+        if(isset($this->session[$name])) {
+            return $this->session[$name];
         }
     }
 
@@ -35,7 +35,7 @@ class Session
 
     public function remove($name)
     {
-        unset($_SESSION[$name]);
+        unset($this->session[$name]);
     }
 
     public function start()
