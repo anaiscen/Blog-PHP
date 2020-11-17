@@ -28,63 +28,9 @@ class Router
         try{
             if(isset($route))
             {
-                if($route === 'article'){
-                    $this->frontController->article($this->request->getGet()->get('articleId'));
-                }
-                elseif($route === 'addArticle'){
-                    $this->backController->addArticle($this->request->getPost());
-                }
-                elseif($route === 'editArticle'){
-                    $this->backController->editArticle($this->request->getPost(), $this->request->getGet()->get('articleId'));
-                }
-                elseif($route === 'deleteArticle'){
-                    $this->backController->deleteArticle($this->request->getGet()->get('articleId'));
-                }
-                elseif($route === 'addComment'){
-                    $this->frontController->addComment($this->request->getPost(), $this->request->getGet()->get('articleId'));
-                }
-                elseif($route === 'validateComment'){
-                    $this->backController->validateComment($this->request->getGet()->get('commentId'));
-                }
-                elseif($route === 'deleteComment'){
-                    $this->backController->deleteComment($this->request->getGet()->get('commentId'));
-                }
-                elseif($route === 'register'){
-                    $this->frontController->register($this->request->getPost());
-                }
-                elseif($route === 'login'){
-                    $this->frontController->login($this->request->getPost());
-                }
-                elseif($route === 'profile'){
-                    $this->backController->profile();
-                }
-                elseif($route === 'updatePassword'){
-                    $this->backController->updatePassword($this->request->getPost());
-                }
-                elseif($route === 'logout'){
-                    $this->backController->logout();
-                }
-                elseif($route === 'deleteAccount'){
-                    $this->backController->deleteAccount();
-                }
-                elseif($route === 'deleteUser'){
-                    $this->backController->deleteUser($this->request->getGet()->get('userId'));
-                }
-                elseif($route === 'validateUser'){
-                    $this->backController->validateUser($this->request->getGet()->get('userId'));
-                }
-                elseif($route === 'administration'){
-                    $this->backController->administration();
-                }
-                elseif($route === 'blog'){
-                    $this->frontController->blog();
-                }
-                elseif($route === 'contact'){
-                    $this->frontController->contact();
-                }
-                else{
-                    $this->errorController->errorNotFound();
-                }
+                $this->runBackController($route);
+                $this->runFrontController($route);
+                $this->errorController->errorNotFound();
             }
             else{
                 $this->frontController->home();
@@ -95,4 +41,67 @@ class Router
             $this->errorController->errorServer();
         }
     }
+
+    private function runFrontController($route)
+    {
+        if($route === 'article'){
+            $this->frontController->article($this->request->getGet()->get('articleId'));
+        }
+        elseif($route === 'addComment'){
+            $this->frontController->addComment($this->request->getPost(), $this->request->getGet()->get('articleId'));
+        }
+        elseif($route === 'register'){
+            $this->frontController->register($this->request->getPost());
+        }
+        elseif($route === 'login'){
+            $this->frontController->login($this->request->getPost());
+        }
+        elseif($route === 'blog'){
+            $this->frontController->blog();
+        }
+        elseif($route === 'contact'){
+            $this->frontController->contact();
+        }
+    }
+
+    private function runBackController($route)
+    {
+        if($route === 'addArticle'){
+            $this->backController->addArticle($this->request->getPost());
+        }
+        elseif($route === 'editArticle'){
+            $this->backController->editArticle($this->request->getPost(), $this->request->getGet()->get('articleId'));
+        }
+        elseif($route === 'deleteArticle'){
+            $this->backController->deleteArticle($this->request->getGet()->get('articleId'));
+        }
+        elseif($route === 'validateComment'){
+            $this->backController->validateComment($this->request->getGet()->get('commentId'));
+        }
+        elseif($route === 'deleteComment'){
+            $this->backController->deleteComment($this->request->getGet()->get('commentId'));
+        }
+        elseif($route === 'profile'){
+            $this->backController->profile();
+        }
+        elseif($route === 'updatePassword'){
+            $this->backController->updatePassword($this->request->getPost());
+        }
+        elseif($route === 'logout'){
+            $this->backController->logout();
+        }
+        elseif($route === 'deleteAccount'){
+            $this->backController->deleteAccount();
+        }
+        elseif($route === 'deleteUser'){
+            $this->backController->deleteUser($this->request->getGet()->get('userId'));
+        }
+        elseif($route === 'validateUser'){
+            $this->backController->validateUser($this->request->getGet()->get('userId'));
+        }
+        elseif($route === 'administration'){
+            $this->backController->administration();
+        }
+    }
+
 }
