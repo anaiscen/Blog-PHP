@@ -33,4 +33,9 @@ abstract class Controller
         $this->post = $this->request->getPost();
         $this->session = $this->request->getSession();
     }
+
+    public function redirect($url)
+    {
+        header($url);
+    }
 }

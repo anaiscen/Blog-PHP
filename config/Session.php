@@ -6,9 +6,9 @@ class Session
 {
     public $session;
 
-    public function __construct(&$session)
+    public function __construct()
     {
-        $this->session = $session;
+        $this->session = &$_SESSION;
     }
 
     public function set($name, $value)

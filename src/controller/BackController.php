@@ -10,7 +10,7 @@ class BackController extends Controller
     {
         if(!$this->session->get('pseudo')) {
             $this->session->set('need_login', 'Vous devez vous connecter pour accéder à cette page');
-            header('Location: ../public/index.php?route=login');
+            $this->redirect('Location: ../public/index.php?route=login');
         } else {
             return true;
         }
@@ -24,7 +24,7 @@ class BackController extends Controller
                 if (!$errors) {
                     $this->articleDAO->addArticle($post, $this->session->get('id'));
                     $this->session->set('add_article', 'Le nouvel article a bien été ajouté');
-                    header('Location: ../public/index.php?route=blog');
+                    $this->redirect('Location: ../public/index.php?route=blog');
                 }
                 return $this->view->render('add_article.html.twig', [
                     'post' => $post,
@@ -48,7 +48,7 @@ class BackController extends Controller
             if ($post->get('submit')) {
                 $this->userDAO->updatePassword($post, $this->session->get('pseudo'));
                 $this->session->set('update_password', 'Le mot de passe a été mis à jour');
-                header('Location: ../public/index.php?route=profile');
+                $this->redirect('Location: ../public/index.php?route=profile');
             }
             return $this->view->render('update_password.html.twig');
         }
@@ -80,6 +80,6 @@ class BackController extends Controller
         } else {
             $this->session->set($param, 'Votre compte a bien été supprimé');
         }
-        header('Location: ../public/index.php?route=blog');
+        $this->redirect('Location: ../public/index.php?route=blog');
     }
 }

@@ -40,7 +40,7 @@ class FrontController extends Controller
             if(!$errors) {
                 $this->commentDAO->addComment($post, $articleId);
                 $this->session->set('add_comment', 'Le nouveau commentaire a bien été ajouté');
-                header("Location: ../public/index.php?route=article&articleId=".$articleId);
+                $this->redirect("Location: ../public/index.php?route=article&articleId=".$articleId);
             }
             $article = $this->articleDAO->getArticle($articleId);
             $comments = $this->commentDAO->getCommentsFromArticle($articleId);
@@ -64,12 +64,12 @@ class FrontController extends Controller
                 $this->userDAO->register($post);
                 $this->session->set('register', 'Votre inscription a bien été effectuée');
                 $this->session->remove('error_register');
-                header('Location: ../public/index.php?route=blog');
+                $this->redirect('Location: ../public/index.php?route=blog');
             }
             else
             {
                 $this->session->set('error_register', 'Ce pseudo est déjà utilisé ou le login / mot de passe est absent.');
-                header('Location: ../public/index.php?route=register');
+                $this->redirect('Location: ../public/index.php?route=register');
             }
         }
         return $this->view->render('register.html.twig');
@@ -86,16 +86,16 @@ class FrontController extends Controller
                     $this->session->set('role', $result['result']['name']);
                     $this->session->set('pseudo', $post->get('pseudo'));
                     $this->session->remove('error_login');
-                    header('Location: ../public/index.php?route=blog');
+                    $this->redirect('Location: ../public/index.php?route=blog');
                 }
                 else {
                     $this->session->set('error_login', 'Ce compte est en attente de validation');
-                    header('Location: ../public/index.php?route=login');
+                    $this->redirect('Location: ../public/index.php?route=login');
                 }
             }
             else {
                 $this->session->set('error_login', 'Le pseudo ou le mot de passe sont incorrects');
-                header('Location: ../public/index.php?route=login');
+                $this->redirect('Location: ../public/index.php?route=login');
             }
         }
         return $this->view->render('login.html.twig');

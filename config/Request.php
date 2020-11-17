@@ -12,7 +12,7 @@ class Request
     {
         $this->get = new Parameter(filter_input_array(INPUT_GET));
         $this->post = new Parameter(filter_input_array(INPUT_POST));
-        $this->session = new Session($_SESSION);
+        $this->session = new Session();
     }
 
     /**
