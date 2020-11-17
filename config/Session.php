@@ -6,9 +6,9 @@ class Session
 {
     public $session;
 
-    public function __construct()
+    public function __construct(&$session)
     {
-        $this->session = &$_SESSION;
+        $this->session = $session;
     }
 
     public function set($name, $value)
@@ -25,7 +25,7 @@ class Session
 
     public function show($name)
     {
-        if(isset($_SESSION[$name]))
+        if(isset($this->session[$name]))
         {
             $key = $this->get($name);
             $this->remove($name);

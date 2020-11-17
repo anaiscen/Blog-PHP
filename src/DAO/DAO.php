@@ -23,19 +23,10 @@ abstract class DAO
     //Méthode de connexion à notre base de données
     private function getConnection()
     {
-        //Tentative de connexion à la base de données
-        try{
             $this->connection = new PDO(DB_HOST, DB_USER, DB_PASS);
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             //On renvoie la connexion
             return $this->connection;
-        }
-            //On lève une erreur si la connexion échoue
-        catch(Exception $errorConnection)
-        {
-            exit ('Erreur de connection :'.$errorConnection->getMessage());
-        }
-
     }
 
     protected function createQuery($sql, $parameters = null)
