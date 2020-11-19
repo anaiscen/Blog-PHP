@@ -10694,3 +10694,7 @@ body {
     font-size: 14px;
   }
 }
+
+.navbar-collapse.in {
+  display: block !important;
+}
