@@ -50,7 +50,7 @@
 							{{ article.getId() }}
 						</td>
 						<td>
-							<a href="../public/index.php?route=article&articleId=<?={{ article.getId() }}">{{ article.getTitle() }}</a>
+							<a href="../public/index.php?route=article&articleId={{ article.getId() }}">{{ article.getTitle() }}</a>
 						</td>
 						<td>
 							{{ article.getContent()|length >
