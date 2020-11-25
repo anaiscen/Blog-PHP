@@ -9,11 +9,14 @@ If you want to see the code on GitHub, click here : [https://github.com/anaiscen
 ## Installation
 To use this blog, you must follow this steps :
 * Create a database and execute the db.sql file located in the config folder
+* Execute the data.sql file located in the config folder to init data
 * Enter your connexion settings in the dev.php file located in the config folder
 * Have fun !
 
+Note : After installation admin user is "admin" and password is "admin", don't forget to change it ! 
+
 ## Preview
-![HomePage](https://github.com/anaiscen/Projet5/blob/Main/public/img/HomePage.png)
+![HomePage](https://github.com/anaiscen/Projet5/blob/main/public/img/HomePage.png)
 
 ## About Freelancer Theme
 
